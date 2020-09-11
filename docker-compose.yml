@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+ 
+    web:
+        build: .
+        container_name: bootcamp_blog
+        volumes:
+            - ./src:/code
+        ports:
+            - "6000:6000"
+        expose:
+            - 6000
+        environment:
+            ALLOWED_HOSTS: django.np11.com
+            SECRET_KEY: AJDOICJPMALJCOIPWKS^Dk
+            VIRTUAL_HOST: django.np11.com
+            VIRTUAL_PORT: 6000
+            LETSENCRYPT_HOST: django.np11.com
+            LETSENCRYPT_EMAIL: niki.ponce@gmail.com
+            VIRTUAL_NETWORK: nginx_proxy
+        working_dir: /code
+        command: bash -c "python blog/manage.py migrate --noinput && python blog/manage.py runserver 0.0.0.0:6000"
+        networks:
+            - nginx_proxy
+    
+networks:
+    nginx_proxy:
+        external: true
