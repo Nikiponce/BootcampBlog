@@ -1,0 +1,26 @@
+{% include "blogapp/base.html" %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-8">
+            <h2 class="my-5">Crea tu Post</h2>
+
+            <form action="savepost/" method="post">
+              {% csrf_token %}
+            
+              <div class="form-group">
+                <input type="text" id="title" name="title" class="form-control" value="{{ post.title}}" placeholder="Título" required="required" autofocus="">
+              </div>
+            
+              <div class="form-group">
+                <textarea class="form-control" id="content" name="content" rows="4"  placeholder="Contenido" required="required">{{ post.content}}</textarea>
+              </div>
+            
+              <div class="form-group">
+                <input class="form-control" type="text" name="imageurl" id="imageurl" value="{{ post.imageurl}}" placeholder="Imagen (URL)" required="required">
+              </div>
+            
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Guardar Post</button>
+            </form>
+        </div>
+    </div>
+</div>
